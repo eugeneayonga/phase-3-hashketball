@@ -1,4 +1,7 @@
 # Write your code below game_hash
+require 'pry'
+
+
 def game_hash
   {
     home: {
@@ -127,3 +130,92 @@ def game_hash
 end
 
 # Write code here
+
+# num_points_scored method
+# knows the number of points scored by each player
+def num_points_scored(player_name)
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:points]
+      end
+    end
+  end
+
+
+# shoe_size method
+# takes in an argument of a player's name and returns the shoe size for that player
+def shoe_size(player_name)
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player[:shoe]
+      end
+    end
+  end
+end
+
+
+# team_colors method
+# knows the Brooklyn Nets colors are Black and White
+# knows the Charlotte Hornets colors are Turquoise and Purple
+def team_colors(team_name)
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+      return team_data[:colors]
+    end
+  end
+end
+
+# team_names
+# returns the team names
+def team_names
+  game_hash.map do |location, team_data|
+    team_data[:team_name]
+  end
+end
+
+
+# player_numbers
+# returns the player jersey numbers
+def player_numbers(team_name)
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+      return team_data[:players].map do |player|
+        player[:number]
+      end
+    end
+  end
+end
+
+
+# player_stats
+# returns all stats for a given player
+def player_stats(player_name)
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name] == player_name
+        return player
+      end
+    end
+  end
+end
+
+# big_shoe_rebounds method
+# returns the number of rebounds of the player with the biggest shoe size
+def big_shoe_rebounds
+  biggest_shoe = 0
+  rebounds = 0
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      if player[:shoe] > biggest_shoe
+        biggest_shoe = player[:shoe]
+        rebounds = player[:rebounds]
+      end
+    end
+  end
+  rebounds
+end
+end
+
+
